@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'data.php';
 
 $action = '';
@@ -12,17 +11,20 @@ if (!empty($_GET['action'])) {
 
 switch ($action) {
     case 'login':
-        login();
+        login($db);
         break;
     case 'logout':
         logout();
+        break;
+    case 'createStudent':
+        createStudent();
         break;
     default:
         echo "action not found";
         exit;
 }
 
-function login()
+function login($db)
 {
     $email = '';
     $password = '';
@@ -39,35 +41,29 @@ function login()
         exit;
     }
 
-
-    $credentials = users();
-
     $userData = [];
-
-    // find User By Email
-    foreach ($credentials as $index => $user) {
-        if ($user['email'] == $email) {
-            $userData = $user;
-            $userData['id'] = $index;
-            break;
-        }
+    // find user
+    if ($db) {
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':email' => $email]);
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $userData = $users[0] ?? [];
     }
-    
-    // verify password
 
     if (empty($userData)) {
         echo "Invalid Email";
         exit;
     }
 
-    if ($userData['password'] !== $password) {
+    // verify password
+    if (!password_verify($password, $userData['password'])) {
         echo "Invalid Password";
         exit;
     }
 
     $_SESSION['user'] = $userData['id'];
     header("Location: /admin/dashboard.php");
-    
 }
 
 function logout()
@@ -75,4 +71,22 @@ function logout()
     session_unset();
     session_destroy();
     header("Location: /admin/login.php");
+}
+
+function createStudent()
+{
+    if (isset($_POST['name']) && isset($_POST['gender']) && isset($_POST['mkondo'])) {
+        $name = $_POST['name'];
+        $gender = $_POST['gender'];
+        $mkondo = $_POST['mkondo'];
+
+        $db = db();
+        $sql = "INSERT INTO students (name, gender, mkondo) VALUES (:name, :gender, :mkondo)";
+        $stmt = $db->prepare($sql);
+        $exc = $stmt->execute([':name' => $name, ':gender' => $gender, ':mkondo' => $mkondo]);
+        if ($exc) {
+            header("Location: ./students/studentsList.php");
+            echo "Student Created Successfully";
+        }
+    }
 }

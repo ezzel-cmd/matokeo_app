@@ -1,106 +1,57 @@
 <?php
-function users()
+
+session_start();
+
+function db()
 {
-    return [
-        ['email' => 'alice1@example.com', 'password' => 'pass1234'],
-        ['email' => 'bob2@example.com', 'password' => 'qwer5678'],
-        ['email' => 'charlie3@example.com', 'password' => 'zxcv4321'],
-        ['email' => 'david4@example.com', 'password' => 'abcd1234'],
-        ['email' => 'emma5@example.com', 'password' => 'pass5678'],
-        ['email' => 'frank6@example.com', 'password' => 'wordpass'],
-        ['email' => 'grace7@example.com', 'password' => 'login321'],
-        ['email' => 'henry8@example.com', 'password' => 'hello123'],
-        ['email' => 'irene9@example.com', 'password' => 'p@ssword'],
-        ['email' => 'jack10@example.com', 'password' => 'admin123'],
-        ['email' => 'karen11@example.com', 'password' => 'sunshine'],
-        ['email' => 'leo12@example.com', 'password' => 'monkey99'],
-        ['email' => 'mia13@example.com', 'password' => 'dragon77'],
-        ['email' => 'nina14@example.com', 'password' => 'kingkong'],
-        ['email' => 'oliver15@example.com', 'password' => 'letmein1'],
-        ['email' => 'paul16@example.com', 'password' => '123qwe!'],
-        ['email' => 'quinn17@example.com', 'password' => 'trustme'],
-        ['email' => 'rose18@example.com', 'password' => 'superman'],
-        ['email' => 'steve19@example.com', 'password' => 'start123'],
-        ['email' => 'tina20@example.com', 'password' => 'omega999'],
-        ['email' => 'ursula21@example.com', 'password' => 'rocket21'],
-        ['email' => 'victor22@example.com', 'password' => 'silver12'],
-        ['email' => 'wanda23@example.com', 'password' => 'cloudy1'],
-        ['email' => 'xander24@example.com', 'password' => 'hunter23'],
-        ['email' => 'yvonne25@example.com', 'password' => 'zebra345'],
-        ['email' => 'zane26@example.com', 'password' => 'alpha@1'],
-        ['email' => 'amy27@example.com', 'password' => 'nova2024'],
-        ['email' => 'ben28@example.com', 'password' => 'echoEcho'],
-        ['email' => 'cara29@example.com', 'password' => 'voodoo44'],
-        ['name' => 'dave', 'email' => 'dan30@example.com', 'password' => 'magic101'],
-        ['email' => 'ella31@example.com', 'password' => 'pencil22'],
-        ['email' => 'fred32@example.com', 'password' => 'lucky777'],
-        ['email' => 'gina33@example.com', 'password' => 'rabbit56'],
-        ['email' => 'hugo34@example.com', 'password' => 'tiger678'],
-        ['email' => 'ivy35@example.com', 'password' => 'delta888'],
-        ['email' => 'john36@example.com', 'password' => 'joker123'],
-        ['email' => 'kate37@example.com', 'password' => 'simple99'],
-        ['email' => 'liam38@example.com', 'password' => 'zerozero'],
-        ['email' => 'maya39@example.com', 'password' => 'bubble33'],
-        ['email' => 'nick40@example.com', 'password' => 'admin000'],
-        ['email' => 'olga41@example.com', 'password' => 'user001'],
-        ['email' => 'pete42@example.com', 'password' => 'skyline7'],
-        ['email' => 'queen43@example.com', 'password' => 'bridge89'],
-        ['email' => 'ryan44@example.com', 'password' => 'stormy3'],
-        ['email' => 'sara45@example.com', 'password' => 'freshAir'],
-        ['email' => 'tom46@example.com', 'password' => 'coffee88'],
-        ['email' => 'uma47@example.com', 'password' => 'banana77'],
-        ['email' => 'vlad48@example.com', 'password' => 'pepper66'],
-        ['email' => 'walt49@example.com', 'password' => 'shadow2'],
-        ['email' => 'xena50@example.com', 'password' => 'rocket5'],
-        ['email' => 'yuri51@example.com', 'password' => 'mystery9'],
-        ['email' => 'zoe52@example.com', 'password' => 'blizzard'],
-        ['email' => 'adam53@example.com', 'password' => 'jackpot3'],
-        ['email' => 'bella54@example.com', 'password' => 'ninja10'],
-        ['email' => 'clark55@example.com', 'password' => 'zoomzoom'],
-        ['email' => 'dina56@example.com', 'password' => 'tornado5'],
-        ['email' => 'ed57@example.com', 'password' => 'blue1234'],
-        ['email' => 'fay58@example.com', 'password' => 'sunny44'],
-        ['email' => 'gary59@example.com', 'password' => 'passpass'],
-        ['email' => 'hana60@example.com', 'password' => 'gamma202'],
-        ['email' => 'ian61@example.com', 'password' => 'lamp7890'],
-        ['email' => 'jill62@example.com', 'password' => 'queen11'],
-        ['email' => 'ken63@example.com', 'password' => 'boldmove'],
-        ['email' => 'luna64@example.com', 'password' => 'secret77'],
-        ['email' => 'max65@example.com', 'password' => 'horse999'],
-        ['email' => 'nora66@example.com', 'password' => 'pluto321'],
-        ['email' => 'otto67@example.com', 'password' => 'devil777'],
-        ['email' => 'pam68@example.com', 'password' => 'matrix88'],
-        ['email' => 'quebec69@example.com', 'password' => 'cipher9'],
-        ['email' => 'rick70@example.com', 'password' => 'light55'],
-        ['email' => 'sue71@example.com', 'password' => 'fireman'],
-        ['email' => 'ted72@example.com', 'password' => 'balloon'],
-        ['email' => 'una73@example.com', 'password' => 'volcano'],
-        ['email' => 'vince74@example.com', 'password' => 'leader3'],
-        ['email' => 'wren75@example.com', 'password' => 'wonder8'],
-        ['email' => 'xoxo76@example.com', 'password' => 'rainy7'],
-        ['email' => 'yale77@example.com', 'password' => 'hammer8'],
-        ['email' => 'zen78@example.com', 'password' => 'castle2'],
-        ['email' => 'al79@example.com', 'password' => 'crimson'],
-        ['email' => 'betty80@example.com', 'password' => 'glider3'],
-        ['email' => 'chuck81@example.com', 'password' => 'breeze7'],
-        ['email' => 'dora82@example.com', 'password' => 'forest6'],
-        ['email' => 'eric83@example.com', 'password' => 'carpet9'],
-        ['email' => 'finn84@example.com', 'password' => 'marvel7'],
-        ['email' => 'gwen85@example.com', 'password' => 'falcon2'],
-        ['email' => 'hal86@example.com', 'password' => 'cookie1'],
-        ['email' => 'ina87@example.com', 'password' => 'flower4'],
-        ['email' => 'joel88@example.com', 'password' => 'signal8'],
-        ['email' => 'kyle89@example.com', 'password' => 'vector1'],
-        ['email' => 'lacy90@example.com', 'password' => 'storm66'],
-        ['email' => 'matt91@example.com', 'password' => 'napkin4'],
-        ['email' => 'nash92@example.com', 'password' => 'clock55'],
-        ['email' => 'opal93@example.com', 'password' => 'flicker'],
-        ['email' => 'paige94@example.com', 'password' => 'golden3'],
-        ['email' => 'quentin95@example.com', 'password' => 'wizard1'],
-        ['email' => 'rosie96@example.com', 'password' => 'circle8'],
-        ['email' => 'sam97@example.com', 'password' => 'rocket9'],
-        ['email' => 'tara98@example.com', 'password' => 'sunflower'],
-        ['email' => 'ugo99@example.com', 'password' => 'joker22'],
-        ['email' => 'vivi100@example.com', 'password' => 'mango88'],
-    ];
+    $host = "localhost";
+    $user = "root";
+    $pass = "password";
+    $database = "matokeo";
+    $db = null;
+    try {
+        $db = new PDO("mysql:host=$host;dbname=$database", $user, $pass);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        echo "Connection failed: " . $e->getMessage();
+    }
+
+    return $db;
 }
+
+$db = db();
+
+function auth()
+{
+    if (!isset($_SESSION['user'])) {
+        return false;
+    }
+
+    $userId = $_SESSION['user'];
+
+    // get User Data
+    $db = db();
+    $sql = "SELECT name, email, role FROM users WHERE id = :id";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([':id' => $userId]);
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $users[0];
+}
+
+// if ($db) {
+//     $sql = "SELECT id, email FROM users WHERE email = :email";
+//     $stmt = $db->prepare($sql);
+//     $stmt->execute([':email' => 'josh@gmail.com']);
+//     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//     print_r($users);
+
+//     // insert
+//     $sql = "INSERT INTO users ( email, password) VALUES (:email, :password)";
+//     $stmt = $db->prepare($sql);
+
+//     try {
+//         $exc = $stmt->execute([':email' => 'jux@gmail.com', ':password' => '1234']);
+//     } catch (PDOException $e) {
+//         echo "Error: " . $e->getMessage();
+//     }
+// }

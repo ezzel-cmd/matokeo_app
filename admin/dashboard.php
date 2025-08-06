@@ -1,14 +1,10 @@
 <?php
-session_start();
 include 'data.php';
-if (!isset($_SESSION['user'])) {
+$user = auth();
+if(!$user){
     header("Location: /admin/login.php");
     exit;
 }
-
-$userId = $_SESSION['user'];
-$userData = users()[$userId];
-
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +29,7 @@ $userData = users()[$userId];
             <a href="/admin/matokeo.php" class="">Matokeo</a>
         </div>
         <div class=" flex gap-4 items-center">
-            <h1 class="text-xl"><?= $userData['name'] ?? $userData['email'] ?></h1>
+            <h1 class="text-xl"><?= $user['name'] ?? $user['email'] ?></h1>
             <a href="/admin/controller.php?action=logout" class="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded">Logout</a>
         </div>
     </div>

@@ -1,0 +1,2 @@
+//seed data
+php ./admin/seeder.php
