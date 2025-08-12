@@ -6,8 +6,8 @@ if (!$user) {
     exit;
 }
 
-if ($user['role'] !== 'admin') {
-    header("Location: ../admin/dashboard.php");
+if ($user['role'] !== 'admin') {  
+    header("Location: ../admin/index.php");   
     exit;
 }
 
@@ -26,66 +26,151 @@ if ($db) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-brands/css/uicons-brands.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Exo:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+    .raleway-font {
+        font-family: "Raleway", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+    }
+    </style>
+    <title>Students</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body>
+<body class="raleway-font w-full h-screen flex bg-blue-100 flex-col">
 
-    <div class="w-full bg-blue-500 text-white p-4 flex justify-between items-center">
-        <div class="">
-            <h1 class="text-2xl font-bold">MATOKEO PANEL</h1>
+    <!-- header -->
+
+    <header class="bg-white shadow-md py-4 px-10 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <button id="menu-toggle"
+                class="text-2xl flex justify-center items-center p-2 rounded-lg hover:bg-gray-100 transition">
+                <i class="fi fi-br-menu-burger "></i>
+            </button>
+
+            <h1 class="text-xl font-extrabold text-blue-600">matokeoApp</h1>
         </div>
-        <div class="flex gap-4 text-lg">
-            <a href="/" class="">Home</a>
-            <a href="/admin/students.php" class="">Students</a>
-            <a href="/admin/matokeo.php" class="">Matokeo</a>
+        <div class="hidden md:flex gap-4 text-blue-600">
+            <i class="fi fi-brands-facebook"></i>
+            <i class="fi fi-brands-youtube"></i>
+            <i class="fi fi-brands-linkedin"></i>
+            <i class="fi fi-brands-instagram"></i>
         </div>
-        <div class=" flex gap-4 items-center">
-            <h1 class="text-xl"><?= $user['name'] ?? $user['email'] ?></h1>
-            <a href="/admin/controller.php?action=logout" class="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded">Logout</a>
-        </div>
+    </header>
+
+
+    <!-- Sidebar (hidden by default) -->
+    <div id="sidebar"
+        class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg px-7 flex flex-col justify-between py-8 transform -translate-x-full transition-transform duration-300 z-50">
+        <h1 class="text-xl p-2 font-extrabold text-gray-800">matokeoApp</h1>
+        <nav class="flex flex-col gap-5">
+            <a href="../../index.php" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100">
+                <i class="fi fi-sr-home text-blue-500"></i> Home
+            </a>
+            <a href="../dashboard.php" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100">
+                <i class="fi fi-sr-apps text-blue-500"></i> Dashboard
+            </a>
+            <a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100">
+                <i class="fi fi-sr-users-alt text-blue-500"></i> Students
+            </a>
+            <a href="../matokeo/matokeoList.php" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100">
+                <i class="fi fi-sr-edit text-blue-500"></i> Results
+            </a>
+            <a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100">
+                <i class="fi fi-sr-comment-alt text-blue-500"></i> Community
+            </a>
+            <a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100">
+                <i class="fi fi-sr-user-gear text-blue-500"></i> Settings
+        </nav>
+        </a>
+        <a href="../controller.php?action=logout" class="flex items-center gap-3 p-2 rounded-lg hover:bg-blue-100">
+            <i class="fi fi-sr-user-logout text-blue-500"></i> Logout
+        </a>
     </div>
-    <div class="w-full my-5">
-        <div class="w-[90vw] mx-auto bg-white rounded-lg shadow-2xl p-10">
-            <div class="flex justify-between">
-                <div class="">
-                    <h1 class="text-start text-3xl font-bold">Students</h1>
-                    <p class="text-start">List Of Students</p>
+
+
+
+    <!-- students -->
+    <div class="w-full h-auto ">
+
+        <div class="w-[90vw] h-auto my-5 mx-auto flex ">
+            <div class="w-[90%] rounded-2xl shadow-2xl  mx-auto bg-white  p-10">
+                <div class=" grid place-content-start space-y-4 md:flex md:justify-between">
+                    <div class="flex-col gap-4">
+                        <h1 class="text-start text-3xl font-bold">Students</h1>
+                        <p class="text-start">List of Students</p>
+                    </div>
+
+                    <div class="grid place-content-start md:place-content-center">
+                        <a href="./createStudent.php"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">Create New
+                            Student</a>
+                    </div>
                 </div>
 
-                <div class="">
-                    <a href="./createStudent.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">Create New Student</a>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-start mt-5 table-fixed border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="p-4 text-start w-14 font-bold">Id</th>
+                                <th class="p-4 text-start w-40 font-bold">Name</th>
+                                <th class="p-4 text-start w-30 font-bold">Gender</th>
+                                <th class="p-4 text-start w-30 font-bold">Mkondo</th>
+                                <th class="p-4 text-start w-50 font-bold">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-gray-200 border-t border-gray-400 text-start">
+                            <?php foreach ($students as $student) : ?>
+                            <tr class="border-b border-gray-300">
+                                <td class="p-4"><?= $student['id'] ?></td>
+                                <td class="p-4"><?= $student['name'] ?></td>
+                                <td class="p-4"><?= $student['gender'] ?></td>
+                                <td class="p-4"><?= $student['mkondo'] ?></td>
+                                <td class="p-4">
+                                    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        href="/admin/students/editStudent.php?id=<?= $student['id'] ?>">Edit</a>
+                                    <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                        href="/admin/students/deleteStudent.php?id=<?= $student['id'] ?>">Delete</a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <table class="w-full text-start mt-5">
-                <thead class="">
-                    <tr>
-                        <th class="p-4 text-start">Id</th>
-                        <th class="p-4 text-start">Name</th>
-                        <th class="p-4 text-start">Gender</th>
-                        <th class="p-4 text-start">Mkondo</th>
-                        <th class="p-4 text-start">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-gray-200 border-b border-gray-400 text-start">
-                    <?php foreach ($students as $student) : ?>
-                        <tr>
-                            <td class="p-4"><?= $student['id'] ?></td>
-                            <td class="p-4"><?= $student['name'] ?></td>
-                            <td class="p-4"><?= $student['gender'] ?></td>
-                            <td class="p-4"><?= $student['mkondo'] ?></td>
-                            <td class="p-4">
-                                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="/admin/students/editStudent.php?id=<?= $student['id'] ?>">Edit</a>
-                                <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/admin/students/deleteStudent.php?id=<?= $student['id'] ?>">Delete</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
         </div>
     </div>
+
+    <div id="overlay" class="hidden fixed inset-0 bg-black/50 z-40"></div>
+
+    <!-- footer -->
+    <footer class="bg-gradient-to-bl from-blue-500 to-blue-700 text-white text-center p-4">
+        <p>Copyright &copy; 2025</p>
+    </footer>
+
+
 </body>
+<script>
+const toggleBtn = document.getElementById('menu-toggle');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full');
+    overlay.classList.toggle('hidden');
+});
+
+overlay.addEventListener('click', () => {
+    sidebar.classList.add('-translate-x-full');
+    overlay.classList.add('hidden');
+});
+</script>
 
 </html>

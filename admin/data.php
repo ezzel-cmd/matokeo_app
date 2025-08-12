@@ -6,10 +6,10 @@ function db()
 {
     $host = "localhost";
     $user = "root";
-    $pass = "password";
+    $pass = "Ezzel@123456789";
     $database = "matokeo";
     $db = null;
-    try {
+    try {      
         $db = new PDO("mysql:host=$host;dbname=$database", $user, $pass);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {

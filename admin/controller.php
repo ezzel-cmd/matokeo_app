@@ -1,6 +1,7 @@
 <?php
 include 'data.php';
 
+
 $action = '';
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
@@ -18,6 +19,15 @@ switch ($action) {
         break;
     case 'createStudent':
         createStudent();
+        break;
+    case 'createMatokeo':
+        createMatokeo();
+        break;
+    case 'updateStudent':
+        updateStudent();
+        break;
+    case 'updateMatokeo':
+        updateMatokeo();
         break;
     default:
         echo "action not found";
@@ -89,4 +99,69 @@ function createStudent()
             echo "Student Created Successfully";
         }
     }
+}
+
+function createMatokeo(){
+    if (isset($_POST['muhula']) && isset($_POST['year'])) {
+        $muhula = $_POST['muhula'];
+        $year = $_POST['year'];
+
+        $db = db();
+        $sql = "INSERT INTO creatematokeo (muhula, year) VALUES (:muhula, :year)";
+        $stmt = $db->prepare($sql);
+        $exc = $stmt->execute([':muhula' => $muhula, ':year' => $year]);
+        if($exc){
+            header('Location: ./matokeo/matokeoList.php');
+        }
+
+    }
+}
+
+function updateStudent(){
+    if ( isset($_POST['id']) &&     isset($_POST['name']) && isset($_POST['gender']) && isset($_POST['mkondo'])) {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $gender = $_POST['gender'];
+        $mkondo = $_POST['mkondo'];
+
+        $db = db();
+        $sql = "UPDATE students SET name = :name, gender = :gender, mkondo = :mkondo WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $exc = $stmt->execute([':name' => $name, ':gender' => $gender, ':mkondo' => $mkondo, ':id' => $id]);
+        if ($exc) {
+            header("Location: ./students/studentsList.php"); 
+            exit;
+        }
+        else {
+            echo "Failed to update student";
+        }
+
+    }
+    else {
+        echo "Required fields are missing";
+        exit;   
+    }
+}
+
+function updateMatokeo() {
+    if( isset($_POST['id']) && isset($_POST['muhula']) && isset($_POST['year'])){
+        $id = $_POST['id'];
+        $muhula = $_POST['muhula'];
+        $year = $_POST['year'];
+
+        $db = db();
+        $sql = "UPDATE creatematokeo SET id = :id, muhula = :muhula, year = :year WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $exc = $stmt->execute([':id' => $id, ':muhula' => $muhula, ':year' =>$year]);
+        if($exc){
+            header("Location: ./matokeo/matokeoList.php");
+        }
+        else{
+            echo "Failed to update matokeo";
+        }
+    }
+    else {
+        echo "Required fields are missing";
+    }
+
 }

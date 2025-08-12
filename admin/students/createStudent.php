@@ -8,11 +8,11 @@ if (!$user) {
     exit;
 }
 
-if ($user['role'] !== 'admin') {
-    header("Location: /admin/dashboard.php");
+if ($user['role'] !== 'admin') {  
+    header("Location: ../admin/index.php"); 
     exit;
 }
-?>
+// ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,23 +20,34 @@ if ($user['role'] !== 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Exo:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+    .raleway-font {
+        font-family: "Raleway", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+    }
+    </style>
+    <title>Create Student</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="h-screen w-full grid place-content-center bg-gray-200 ">
+<body class="raleway-font h-screen w-full grid place-content-center bg-gray-200 ">
     <div class=" w-[90vw] md:w-[50vw] lg:w-[30vw] bg-white rounded-lg shadow-2xl p-10">
         <h1 class="text-center text-3xl font-bold">Create Student</h1>
         <p class="text-center">Add Student Data!</p>
 
         <form action="../controller.php?action=createStudent" method="post">
             <div class="flex flex-col w-[70%] mx-auto mt-10 space-y-2">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" required class="p-2 border-2 border-gray-400 rounded-lg" placeholder="Enter Student Name">
+                <label for="name" class="font-medium">Name</label>
+                <input type="text" name="name" id="name" required class="p-2 border-2 border-gray-400 rounded-lg"
+                    placeholder="Enter Student Name">
             </div>
 
             <div class="flex flex-col w-[70%] mx-auto mt-5 space-y-2">
-                <label for="gender">Gender</label>
+                <label for="gender" class="font-medium">Gender</label>
                 <select name="gender" id="gender" required class="p-2 border-2 border-gray-400 rounded-lg">
                     <option value="" disabled selected>Select Gender</option>
                     <option value="male">Male</option>
@@ -45,17 +56,18 @@ if ($user['role'] !== 'admin') {
             </div>
 
             <div class="flex flex-col w-[70%] mx-auto mt-5 space-y-2">
-                <label for="mkondo">Mkondo</label>
+                <label for="mkondo" class="font-medium">Mkondo</label>
                 <select name="mkondo" id="mkondo" required class="p-2 border-2 border-gray-400 rounded-lg">
                     <option value="" disabled selected>Select Mkondo</option>
-                    <option value="mkondoA">Mkondo A</option>
-                    <option value="mkondoB">Mkondo B</option>
-                    <option value="mkondoC">Mkondo C</option>
+                    <option value="mkondo A">Mkondo A</option>
+                    <option value="mkondo B">Mkondo B</option>
+                    <option value="mkondo C">Mkondo C</option>
                 </select>
             </div>
 
             <div class="w-[70%] mx-auto">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-4 rounded-lg mt-5 w-full ">Create</button>
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-4 rounded-lg mt-5 w-full ">Create</button>
             </div>
         </form>
     </div>
