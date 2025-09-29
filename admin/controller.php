@@ -1,7 +1,6 @@
 <?php
 include 'data.php';
 
-
 $action = '';
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
@@ -16,7 +15,7 @@ switch ($action) {
         break;
     case 'logout':
         logout();
-        break;
+        break;   
     case 'createStudent':
         createStudent();
         break;

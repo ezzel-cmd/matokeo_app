@@ -14,10 +14,11 @@ $matokeoCount = 0;
 if ($db) {
     $stmt1 = $db->query("SELECT COUNT(*) AS total FROM students");
     $studentCount = $stmt1->fetch(PDO::FETCH_ASSOC)['total'];
-
     $stmt2 = $db->query("SELECT COUNT(*) AS total FROM creatematokeo");
     $matokeoCount = $stmt2->fetch(PDO::FETCH_ASSOC)['total'];
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
